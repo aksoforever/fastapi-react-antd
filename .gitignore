@@ -1,0 +1,25 @@
+.vscode
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Python 虚拟环境
+backend/.venv/
+
+# Node.js 依赖
+frontend/node_modules/
+
+# Playwright 测试结果和缓存
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+frontend/playwright/.cache/
+
+# 其它可能的缓存
+__pycache__/
+*.pyc
+
+# 根 .env
+.env
