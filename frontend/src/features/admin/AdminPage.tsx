@@ -147,7 +147,6 @@ export default function AdminPage() {
             style={{
               display: "flex",
               justifyContent: "flex-end",
-              margin: "24px 0",
             }}
           >
             <Pagination

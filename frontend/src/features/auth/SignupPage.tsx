@@ -32,7 +32,7 @@ export default function SignupPage() {
         <img
           src={Logo}
           alt="FastAPI logo"
-          style={{ display: "block", margin: "0 auto 24px", maxWidth: 160 }}
+          style={{ display: "block", margin: "0 auto 24px", maxWidth: 240 }}
         />
         <Form
           form={form}

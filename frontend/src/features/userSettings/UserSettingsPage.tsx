@@ -2,7 +2,6 @@ import { Card, Typography, Tabs } from "antd";
 import useAuth from "@/hooks/useAuth";
 import UserInformation from "./UserInformation";
 import ChangePassword from "./ChangePassword";
-import Appearance from "./Appearance";
 import DeleteAccount from "./DeleteAccount";
 
 export default function UserSettingsPage() {

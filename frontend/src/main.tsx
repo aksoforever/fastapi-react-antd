@@ -11,6 +11,11 @@ import { routeTree } from "./routeTree.gen";
 
 import { ApiError, OpenAPI } from "./client";
 
+import "./global.css";
+
+import { ConfigProvider, App as AntdApp } from "antd";
+import zhCN from "antd/locale/zh_CN";
+
 OpenAPI.BASE = import.meta.env.VITE_API_URL;
 OpenAPI.TOKEN = async () => {
   return localStorage.getItem("access_token") || "";
@@ -40,8 +45,21 @@ declare module "@tanstack/react-router" {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        token: {
+          borderRadius: 2,
+          colorPrimary: "#E0282E", // 主色
+          fontSize: 16,
+        },
+      }}
+    >
+      <AntdApp>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </AntdApp>
+    </ConfigProvider>
   </StrictMode>
 );

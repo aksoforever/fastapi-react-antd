@@ -3,7 +3,6 @@ import { LockOutlined } from "@ant-design/icons";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { LoginService } from "@/client";
-import { useState } from "react";
 
 export default function ResetPasswordPage() {
   const [form] = Form.useForm();

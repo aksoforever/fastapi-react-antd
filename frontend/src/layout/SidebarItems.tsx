@@ -7,7 +7,7 @@ import {
   TeamOutlined,
 } from "@ant-design/icons";
 import { useNavigate, useLocation } from "@tanstack/react-router";
-import type { UserPublic } from "@/client";
+import type { UserPublic, UsersService } from "@/client";
 
 const menuData = [
   { key: "/", icon: <HomeOutlined />, label: "Dashboard" },
@@ -18,11 +18,12 @@ const menuData = [
 export default function SidebarItems({ onSelect }) {
   const { data: currentUser, isLoading } = useQuery<UserPublic>({
     queryKey: ["currentUser"],
+    queryFn: () => UsersService.readUserMe(),
   });
   const navigate = useNavigate();
   const location = useLocation();
 
-  if (isLoading) return null; // 或者 loading skeleton
+  if (isLoading) return null; // 可以替换成 Skeleton
 
   const finalMenu = currentUser?.is_superuser
     ? [...menuData, { key: "/admin", icon: <TeamOutlined />, label: "Admin" }]

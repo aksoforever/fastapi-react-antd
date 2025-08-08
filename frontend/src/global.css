@@ -1,0 +1,9 @@
+/* src/global.css */
+body {
+  margin: 0; /* 去掉默认 8px 外边距 */
+}
+
+/* 你还可以放一些通用的全局样式 */
+* {
+  box-sizing: border-box;
+}

@@ -16,4 +16,4 @@ def print_tree(root_dir):
     walk(root_dir)
 
 # Example usage:
-print_tree("frontend\\tests")
+print_tree("frontend\\src")
