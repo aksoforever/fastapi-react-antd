@@ -3,7 +3,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DeleteOutlined } from "@ant-design/icons";
 import { UsersService } from "@/client";
 
-export default function DeleteUserButton({ id, disabled }) {
+interface DeleteUserButtonProps {
+  id: string;
+  disabled?: boolean;
+}
+export default function DeleteUserButton({
+  id,
+  disabled,
+}: DeleteUserButtonProps) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({

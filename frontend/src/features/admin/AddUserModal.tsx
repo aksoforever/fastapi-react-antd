@@ -1,15 +1,24 @@
 import { Modal, Form, Input, Checkbox, message } from "antd";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { UsersService } from "@/client";
+import {
+  UsersService,
+  type UserCreate,
+  type UserPublic,
+  type ApiError,
+} from "@/client";
 
-export default function AddUserModal({ open, onClose }) {
-  const [form] = Form.useForm();
+interface AddUserModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+type UserCreateForm = UserCreate & { confirm_password: string };
+export default function AddUserModal({ open, onClose }: AddUserModalProps) {
+  const [form] = Form.useForm<UserCreateForm>();
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: async (data) => {
-      await UsersService.createUser({ requestBody: data });
-    },
+  const mutation = useMutation<UserPublic, ApiError, UserCreate>({
+    mutationFn: (data) => UsersService.createUser({ requestBody: data }),
     onSuccess: () => {
       message.success("User created successfully.");
       queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -33,7 +42,8 @@ export default function AddUserModal({ open, onClose }) {
           ]);
           return;
         }
-        mutation.mutate(values);
+        const { confirm_password: _cp, ...payload } = values;
+        mutation.mutate(payload);
         form.resetFields(); // 这里在提交后重置
       })
       .catch(() => {});
@@ -59,7 +69,7 @@ export default function AddUserModal({ open, onClose }) {
             password: "",
             confirm_password: "",
             is_superuser: false,
-            is_active: false,
+            is_active: true,
           }}
         >
           <Form.Item

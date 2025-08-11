@@ -7,7 +7,7 @@ import {
   TeamOutlined,
 } from "@ant-design/icons";
 import { useNavigate, useLocation } from "@tanstack/react-router";
-import type { UserPublic, UsersService } from "@/client";
+import { UsersService, type UserPublic } from "@/client";
 
 const menuData = [
   { key: "/", icon: <HomeOutlined />, label: "Dashboard" },
@@ -15,7 +15,12 @@ const menuData = [
   { key: "/settings", icon: <SettingOutlined />, label: "User Settings" },
 ];
 
-export default function SidebarItems({ onSelect }) {
+// ✅ 明确 props，onSelect 设为可选
+interface SidebarItemsProps {
+  onSelect?: () => void;
+}
+// ✅ 类型检查 props
+export default function SidebarItems({ onSelect }: SidebarItemsProps) {
   const { data: currentUser, isLoading } = useQuery<UserPublic>({
     queryKey: ["currentUser"],
     queryFn: () => UsersService.readUserMe(),
@@ -36,7 +41,7 @@ export default function SidebarItems({ onSelect }) {
       selectedKeys={[location.pathname]}
       onClick={({ key }) => {
         navigate({ to: key });
-        if (onSelect) onSelect();
+        onSelect?.();
       }}
       style={{ borderRight: 0 }}
     />

@@ -1,10 +1,23 @@
 import { Modal, Form, Input, message } from "antd";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { ItemsService } from "@/client";
-
-export default function EditItemModal({ open, onClose, item }) {
-  const [form] = Form.useForm();
+import {
+  ItemsService,
+  type ItemUpdate,
+  type ItemPublic,
+  type ApiError,
+} from "@/client";
+interface EditItemModalProps {
+  open: boolean;
+  onClose: () => void;
+  item: ItemPublic | null;
+}
+export default function EditItemModal({
+  open,
+  onClose,
+  item,
+}: EditItemModalProps) {
+  const [form] = Form.useForm<ItemUpdate>();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -16,9 +29,10 @@ export default function EditItemModal({ open, onClose, item }) {
     }
   }, [open, item, form]);
 
-  const mutation = useMutation({
+  const mutation = useMutation<ItemPublic, ApiError, ItemUpdate>({
     mutationFn: async (data) => {
-      await ItemsService.updateItem({ id: item.id, requestBody: data });
+      if (!item) throw new Error("No item to update");
+      return ItemsService.updateItem({ id: item.id, requestBody: data });
     },
     onSuccess: () => {
       message.success("Item updated successfully.");
@@ -53,7 +67,7 @@ export default function EditItemModal({ open, onClose, item }) {
       confirmLoading={mutation.isPending}
       destroyOnHidden
     >
-      <Form form={form} layout="vertical">
+      <Form<ItemUpdate> form={form} layout="vertical">
         <Form.Item
           name="title"
           label="Title"

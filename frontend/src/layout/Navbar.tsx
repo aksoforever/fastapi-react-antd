@@ -1,4 +1,4 @@
-import { Layout, Avatar, Typography, Space } from "antd";
+import { Layout, Space } from "antd";
 import { Link } from "@tanstack/react-router";
 import Logo from "/assets/images/logo.svg";
 import UserMenu from "./UserMenu"; // 按你现在项目结构调整

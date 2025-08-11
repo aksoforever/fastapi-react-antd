@@ -1,6 +1,6 @@
 import { Typography, Layout } from "antd";
 import useAuth from "@/hooks/useAuth";
-
+import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/_layout/")({
   component: Dashboard,
 });

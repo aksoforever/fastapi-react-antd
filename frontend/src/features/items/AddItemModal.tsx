@@ -1,15 +1,22 @@
 import { Modal, Form, Input, message } from "antd";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ItemsService } from "@/client";
+import {
+  ItemsService,
+  type ItemCreate,
+  type ItemPublic,
+  type ApiError,
+} from "@/client";
 
-export default function AddItemModal({ open, onClose }) {
-  const [form] = Form.useForm();
+interface AddItemModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+export default function AddItemModal({ open, onClose }: AddItemModalProps) {
+  const [form] = Form.useForm<ItemCreate>();
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: async (data) => {
-      await ItemsService.createItem({ requestBody: data });
-    },
+  const mutation = useMutation<ItemPublic, ApiError, ItemCreate>({
+    mutationFn: (data) => ItemsService.createItem({ requestBody: data }),
     onSuccess: () => {
       message.success("Item created successfully.");
       queryClient.invalidateQueries({ queryKey: ["items"] });
@@ -43,7 +50,7 @@ export default function AddItemModal({ open, onClose }) {
       confirmLoading={mutation.isPending}
       destroyOnHidden
     >
-      <Form form={form} layout="vertical">
+      <Form<ItemCreate> form={form} layout="vertical">
         <Form.Item
           name="title"
           label="Title"

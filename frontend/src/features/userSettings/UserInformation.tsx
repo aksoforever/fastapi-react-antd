@@ -2,13 +2,17 @@ import { Card, Typography, Form, Input, Button, Space, message } from "antd";
 import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAuth from "@/hooks/useAuth";
-import { UsersService } from "@/client";
+import {
+  UsersService,
+  type UserUpdateMe, // ✅ 引入类型
+  type ApiError, // （可选）若你的客户端里有这个类型
+} from "@/client";
 
 export default function UserInformation() {
   const queryClient = useQueryClient();
   const { user: currentUser } = useAuth();
   const [editMode, setEditMode] = useState(false);
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<UserUpdateMe>();
 
   useEffect(() => {
     if (currentUser && editMode) {
@@ -22,13 +26,14 @@ export default function UserInformation() {
     }
   }, [editMode, currentUser, form]);
 
-  const mutation = useMutation({
+  const mutation = useMutation<void, ApiError, UserUpdateMe>({
     mutationFn: async (data) => {
-      await UsersService.updateUserMe({ requestBody: data });
+      await UsersService.updateUserMe({ requestBody: data }); // ✅ data 已是 UserUpdateMe
     },
     onSuccess: () => {
       message.success("User updated successfully.");
-      queryClient.invalidateQueries();
+      // 更精确的刷新（你也可以根据项目实际的 queryKey 调整）
+      queryClient.invalidateQueries({ queryKey: ["currentUser"] });
       setEditMode(false);
     },
     onError: (e) => {
@@ -36,7 +41,7 @@ export default function UserInformation() {
     },
   });
 
-  const onFinish = (data) => {
+  const onFinish = (data: UserUpdateMe) => {
     mutation.mutate(data);
   };
 
@@ -45,7 +50,7 @@ export default function UserInformation() {
   return (
     <Card title="User Information" variant="outlined">
       {editMode ? (
-        <Form
+        <Form<UserUpdateMe>
           form={form}
           layout="vertical"
           initialValues={{

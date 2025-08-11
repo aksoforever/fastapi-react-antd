@@ -3,7 +3,7 @@ import DeleteConfirmation from "./DeleteConfirmation";
 
 export default function DeleteAccount() {
   return (
-    <Card title="Delete Account" variant="filled">
+    <Card title="Delete Account" variant="outlined">
       <Typography.Text>
         Permanently delete your data and everything associated with your
         account.

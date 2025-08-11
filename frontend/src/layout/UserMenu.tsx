@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Typography } from "antd";
+import { Avatar, Dropdown, Typography, type MenuProps } from "antd";
 import {
   UserOutlined,
   LogoutOutlined,
@@ -7,13 +7,14 @@ import {
 import useAuth from "@/hooks/useAuth";
 import { Link } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
+import type { UserPublic } from "@/client";
 
 export default function UserMenu() {
   const { logout } = useAuth();
   const queryClient = useQueryClient();
-  const user = queryClient.getQueryData(["currentUser"]);
+  const user = queryClient.getQueryData<UserPublic>(["currentUser"]);
 
-  const menuItems = [
+  const menuItems: MenuProps["items"] = [
     {
       key: "profile",
       icon: <SettingOutlined />,

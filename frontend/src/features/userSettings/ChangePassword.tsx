@@ -1,24 +1,23 @@
-import { Card, Typography, Form, Input, Button, message } from "antd";
+import { Card, Form, Input, Button, message } from "antd";
 import { useMutation } from "@tanstack/react-query";
-import { UsersService } from "@/client";
-
+import { UsersService, type UpdatePassword } from "@/client";
 export default function ChangePassword() {
   const [form] = Form.useForm();
 
   const mutation = useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (data: UpdatePassword) => {
       await UsersService.updatePasswordMe({ requestBody: data });
     },
     onSuccess: () => {
       message.success("Password updated successfully.");
       form.resetFields();
     },
-    onError: (e) => {
+    onError: (e: any) => {
       message.error(e?.message || "Change failed");
     },
   });
 
-  const onFinish = (data) => {
+  const onFinish = (data: UpdatePassword) => {
     mutation.mutate(data);
   };
 
