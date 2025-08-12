@@ -1,9 +1,13 @@
 # app/models.py
 # 统一“兼容导出”入口：别再直接在这里定义 ORM 或 Schemas
+from sqlmodel import SQLModel
 
 # ORM 模型
 from app.domains.users.models import User  # noqa: F401
 from app.domains.items.models import Item  # noqa: F401
+
+
+__all__ = ["SQLModel"]
 
 # 用户相关 Schemas
 from app.domains.users.schemas import (  # noqa: F401
