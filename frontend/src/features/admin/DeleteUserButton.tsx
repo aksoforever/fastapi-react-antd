@@ -28,6 +28,7 @@ export default function DeleteUserButton({
 
   return (
     <Popconfirm
+      placement="top"
       title="Delete User"
       description="All items associated with this user will also be permanently deleted. Are you sure?"
       onConfirm={() => mutation.mutate()}

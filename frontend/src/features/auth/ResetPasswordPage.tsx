@@ -22,7 +22,7 @@ export default function ResetPasswordPage() {
     onSuccess: () => {
       message.success("Password updated successfully.");
       form.resetFields();
-      navigate({ to: "/login" });
+      navigate({ to: "/auth/login" });
     },
     onError: (err: any) => {
       message.error(err?.message || "Reset failed");

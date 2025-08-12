@@ -59,7 +59,7 @@ export default function LoginPage() {
           </Form.Item>
 
           <div style={{ marginBottom: 16, textAlign: "right" }}>
-            <a href="/recover-password">Forgot Password?</a>
+            <a href="/auth/recover-password">Forgot Password?</a>
           </div>
 
           <Form.Item>
@@ -75,7 +75,7 @@ export default function LoginPage() {
         </Form>
 
         <Typography.Text>
-          Don't have an account? <a href="/signup">Sign Up</a>
+          Don't have an account? <a href="/auth/signup">Sign Up</a>
         </Typography.Text>
       </div>
     </div>

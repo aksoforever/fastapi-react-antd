@@ -33,7 +33,7 @@ export default function SidebarItems({ onSelect }: SidebarItemsProps) {
       label: "Content",
       children: [
         { key: "/items", label: "Items" },
-        { key: "/items/new", label: "Create Item" },
+        // { key: "/items/new", label: "Create Item" },
       ],
     },
     { key: "/settings", icon: <SettingOutlined />, label: "User Settings" },
@@ -48,7 +48,7 @@ export default function SidebarItems({ onSelect }: SidebarItemsProps) {
           label: "Admin",
           children: [
             { key: "/admin", icon: <UserOutlined />, label: "Users" },
-            { key: "/admin/system", label: "System" },
+            // { key: "/admin/system", label: "System" },
           ],
         },
       ]

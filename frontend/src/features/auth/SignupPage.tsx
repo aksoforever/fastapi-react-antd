@@ -13,7 +13,7 @@ export default function SignupPage() {
     try {
       await signUpMutation.mutateAsync(values);
       message.success("Sign up successful! Please login.");
-      navigate({ to: "/login" });
+      navigate({ to: "/auth/login" });
     } catch (e: any) {
       message.error(e?.message || "Sign up failed");
     }
