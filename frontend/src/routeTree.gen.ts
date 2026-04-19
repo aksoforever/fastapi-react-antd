@@ -14,9 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
-import { Route as AuthSignupImport } from './routes/auth/signup'
-import { Route as AuthResetPasswordImport } from './routes/auth/reset-password'
-import { Route as AuthRecoverPasswordImport } from './routes/auth/recover-password'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as LayoutSettingsIndexImport } from './routes/_layout/settings/index'
 import { Route as LayoutItemsIndexImport } from './routes/_layout/items/index'
@@ -37,21 +34,6 @@ const LayoutRoute = LayoutImport.update({
 const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
   getParentRoute: () => LayoutRoute,
-} as any)
-
-const AuthSignupRoute = AuthSignupImport.update({
-  path: '/auth/signup',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AuthResetPasswordRoute = AuthResetPasswordImport.update({
-  path: '/auth/reset-password',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AuthRecoverPasswordRoute = AuthRecoverPasswordImport.update({
-  path: '/auth/recover-password',
-  getParentRoute: () => rootRoute,
 } as any)
 
 const AuthLoginRoute = AuthLoginImport.update({
@@ -90,18 +72,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginImport
       parentRoute: typeof rootRoute
     }
-    '/auth/recover-password': {
-      preLoaderRoute: typeof AuthRecoverPasswordImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/reset-password': {
-      preLoaderRoute: typeof AuthResetPasswordImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/signup': {
-      preLoaderRoute: typeof AuthSignupImport
-      parentRoute: typeof rootRoute
-    }
     '/_layout/': {
       preLoaderRoute: typeof LayoutIndexImport
       parentRoute: typeof LayoutImport
@@ -132,9 +102,6 @@ export const routeTree = rootRoute.addChildren([
   ]),
   AboutRoute,
   AuthLoginRoute,
-  AuthRecoverPasswordRoute,
-  AuthResetPasswordRoute,
-  AuthSignupRoute,
 ])
 
 /* prettier-ignore-end */

@@ -39,18 +39,6 @@ export type Message = {
   message: string
 }
 
-export type NewPassword = {
-  token: string
-  new_password: string
-}
-
-export type PrivateUserCreate = {
-  email: string
-  password: string
-  full_name: string
-  is_verified?: boolean
-}
-
 export type Token = {
   access_token: string
   token_type?: string
@@ -75,12 +63,6 @@ export type UserPublic = {
   is_superuser?: boolean
   full_name?: string | null
   id: string
-}
-
-export type UserRegister = {
-  email: string
-  password: string
-  full_name?: string | null
 }
 
 export type UsersPublic = {
@@ -147,30 +129,6 @@ export type LoginLoginAccessTokenResponse = Token
 
 export type LoginTestTokenResponse = UserPublic
 
-export type LoginRecoverPasswordData = {
-  email: string
-}
-
-export type LoginRecoverPasswordResponse = Message
-
-export type LoginResetPasswordData = {
-  requestBody: NewPassword
-}
-
-export type LoginResetPasswordResponse = Message
-
-export type LoginRecoverPasswordHtmlContentData = {
-  email: string
-}
-
-export type LoginRecoverPasswordHtmlContentResponse = string
-
-export type PrivateCreateUserData = {
-  requestBody: PrivateUserCreate
-}
-
-export type PrivateCreateUserResponse = UserPublic
-
 export type UsersReadUsersData = {
   limit?: number
   skip?: number
@@ -200,12 +158,6 @@ export type UsersUpdatePasswordMeData = {
 
 export type UsersUpdatePasswordMeResponse = Message
 
-export type UsersRegisterUserData = {
-  requestBody: UserRegister
-}
-
-export type UsersRegisterUserResponse = UserPublic
-
 export type UsersReadUserByIdData = {
   userId: string
 }
@@ -224,11 +176,5 @@ export type UsersDeleteUserData = {
 }
 
 export type UsersDeleteUserResponse = Message
-
-export type UtilsTestEmailData = {
-  emailTo: string
-}
-
-export type UtilsTestEmailResponse = Message
 
 export type UtilsHealthCheckResponse = boolean

@@ -16,12 +16,6 @@ class UserCreate(UserBase):
     password: str = Field(min_length=8, max_length=40)
 
 
-class UserRegister(SQLModel):
-    email: EmailStr = Field(max_length=255)
-    password: str = Field(min_length=8, max_length=40)
-    full_name: str | None = Field(default=None, max_length=255)
-
-
 class UserUpdate(UserBase):
     # 所有字段可选
     email: EmailStr | None = Field(default=None, max_length=255)  # type: ignore

@@ -19,7 +19,6 @@ from app.models import (
     User,
     UserCreate,
     UserPublic,
-    UserRegister,
     UsersPublic,
     UserUpdate,
     UserUpdateMe,
@@ -85,15 +84,6 @@ def delete_user_me(session: SessionDep, current_user: CurrentUser) -> Any:
     session.delete(current_user)
     session.commit()
     return Message(message="User deleted successfully")
-
-
-@router.post("/signup", response_model=UserPublic)
-def register_user(session: SessionDep, user_in: UserRegister) -> Any:
-    user_service = UserService(session)
-    if user_service.get_by_email(email=user_in.email):
-        raise HTTPException(status_code=400, detail="The user with this email already exists in the system")
-    user_create = UserCreate.model_validate(user_in)
-    return user_service.create_user(user_create=user_create)
 
 
 @router.get("/{user_id}", response_model=UserPublic)

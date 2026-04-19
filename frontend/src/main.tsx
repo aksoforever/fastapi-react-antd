@@ -16,7 +16,7 @@ import "./global.css";
 import { ConfigProvider, App as AntdApp } from "antd";
 import zhCN from "antd/locale/zh_CN";
 
-OpenAPI.BASE = import.meta.env.VITE_API_URL;
+OpenAPI.BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 OpenAPI.TOKEN = async () => {
   return localStorage.getItem("access_token") || "";
 };

@@ -1,4 +1,4 @@
-import { Form, Input, Button, Typography, message } from "antd";
+import { App, Form, Input, Button } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import useAuth from "@/hooks/useAuth";
 import Logo from "/assets/images/logo.svg";
@@ -6,6 +6,7 @@ import Logo from "/assets/images/logo.svg";
 export default function LoginPage() {
   const { loginMutation, resetError } = useAuth();
   const [form] = Form.useForm();
+  const { message } = App.useApp();
 
   const onFinish = async (values: { username: string; password: string }) => {
     resetError();
@@ -57,11 +58,6 @@ export default function LoginPage() {
           >
             <Input.Password prefix={<LockOutlined />} placeholder="Password" />
           </Form.Item>
-
-          <div style={{ marginBottom: 16, textAlign: "right" }}>
-            <a href="/auth/recover-password">Forgot Password?</a>
-          </div>
-
           <Form.Item>
             <Button
               type="primary"
@@ -73,10 +69,6 @@ export default function LoginPage() {
             </Button>
           </Form.Item>
         </Form>
-
-        <Typography.Text>
-          Don't have an account? <a href="/auth/signup">Sign Up</a>
-        </Typography.Text>
       </div>
     </div>
   );

@@ -13,7 +13,6 @@ __all__ = ["SQLModel"]
 from app.domains.users.schemas import (  # noqa: F401
     UserBase,
     UserCreate,
-    UserRegister,
     UserUpdate,
     UserUpdateMe,
     UpdatePassword,
@@ -35,7 +34,6 @@ from app.schemas.common import (  # noqa: F401
     Message,
     Token,
     TokenPayload,
-    NewPassword,
 )
 
 __all__ = [
@@ -45,7 +43,6 @@ __all__ = [
     # Users
     "UserBase",
     "UserCreate",
-    "UserRegister",
     "UserUpdate",
     "UserUpdateMe",
     "UpdatePassword",
@@ -61,5 +58,4 @@ __all__ = [
     "Message",
     "Token",
     "TokenPayload",
-    "NewPassword",
 ]
